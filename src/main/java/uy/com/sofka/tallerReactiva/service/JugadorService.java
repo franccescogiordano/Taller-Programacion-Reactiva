@@ -20,10 +20,32 @@ public class JugadorService {
                 .filter(jugador -> jugador.getAge() > 34);
         return playersOlderThan34;
     }
+
     public Flux<JugadorMongo> obtenerJugadores(){
         Flux<JugadorMongo> jugadores = jugadorRepository.findAll()
                 .buffer(120)
                 .flatMap(jugador -> Flux.fromStream(jugador.parallelStream()));
         return jugadores;
     }
+
+    public Flux<JugadorMongo> obtenerJugadoresPorClub(String club){
+        Flux<JugadorMongo> playersByClub = jugadorRepository.findAll()
+                .buffer(120)
+                .flatMap(player -> Flux.fromStream(player.parallelStream()))
+                .filter(playerNoNullClub -> Objects.nonNull(playerNoNullClub.getClub()))
+                .filter(jugador -> jugador.getClub().equals(club));
+        return playersByClub;
+    }
+
+    public Flux<List<JugadorMongo>> ordenarJugadoresPorNacionalidadYPuntaje(){
+        Flux<List<JugadorMongo>> jugadoresPorPais = jugadorRepository
+                .findAll()
+                .buffer(120)
+                .flatMap(jugador -> Flux.fromStream(jugador.parallelStream()))
+                .distinct().groupBy(JugadorMongo::getNational)
+                .flatMap(Flux::collectList).map(lista ->
+                {lista.sort(Comparator.comparingDouble(JugadorMongo::getRanking));return lista; });
+        return jugadoresPorPais;
+    }
+
 }
