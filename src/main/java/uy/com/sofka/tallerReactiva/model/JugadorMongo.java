@@ -29,29 +29,12 @@ public class JugadorMongo {
         this.ranking = ranking;
         this.club = club;
     }
-
-    public String getName() {
-        return name;
-    }
-
     public int getAge() {
         return age;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
     public String getNational() {
         return national;
-    }
-
-    public int getWinners() {
-        return winners;
-    }
-
-    public int getGamers() {
-        return gamers;
     }
 
     public double getRanking() {
