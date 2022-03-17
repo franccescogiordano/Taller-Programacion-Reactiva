@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class csvUtilFile {
     private csvUtilFile(){}
-
     public static List<Jugador> getPlayers(){
         var uri =  csvUtilFile.class.getClassLoader().getResource("data.csv");
         List<Jugador> list = new ArrayList<>();
@@ -28,9 +27,7 @@ public class csvUtilFile {
                     Integer.parseInt(strings[6].trim()),
                     strings[7]
             )));
-
             return list;
-
         } catch (IOException | CsvException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
