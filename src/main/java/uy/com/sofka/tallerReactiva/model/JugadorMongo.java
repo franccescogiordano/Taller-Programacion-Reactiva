@@ -1,8 +1,9 @@
 package uy.com.sofka.tallerReactiva.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
+
 
 @Document(collection = "jugadores")
 public class JugadorMongo {
@@ -29,6 +30,9 @@ public class JugadorMongo {
         this.ranking = ranking;
         this.club = club;
     }
+    public JugadorMongo() {
+
+    }
     public int getAge() {
         return age;
     }
@@ -43,5 +47,61 @@ public class JugadorMongo {
 
     public String getClub() {
         return club;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public void setNational(String national) {
+        this.national = national;
+    }
+
+    public int getWinners() {
+        return winners;
+    }
+
+    public void setWinners(int winners) {
+        this.winners = winners;
+    }
+
+    public int getGamers() {
+        return gamers;
+    }
+
+    public void setGamers(int gamers) {
+        this.gamers = gamers;
+    }
+
+    public void setRanking(double ranking) {
+        this.ranking = ranking;
+    }
+
+    public void setClub(String club) {
+        this.club = club;
     }
 }

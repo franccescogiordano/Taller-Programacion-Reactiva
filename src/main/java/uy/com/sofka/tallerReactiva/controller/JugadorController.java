@@ -2,11 +2,16 @@ package uy.com.sofka.tallerReactiva.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import uy.com.sofka.tallerReactiva.model.Jugador;
 import uy.com.sofka.tallerReactiva.model.JugadorMongo;
 import uy.com.sofka.tallerReactiva.service.JugadorService;
 import java.util.List;
-@RestController
+import java.util.Objects;
+
+
 @CrossOrigin("*")
+@RestController
 @RequestMapping("/api")
 
 public class JugadorController {
@@ -30,7 +35,10 @@ public class JugadorController {
     public Flux<List<JugadorMongo>> jugadoresPorPais(){
         return jugadorService.ordenarJugadoresPorNacionalidadYPuntaje();
     }
-
+    @PostMapping("/jugadores/crear")
+    private Mono<JugadorMongo> guardarJugador(@RequestBody Mono<JugadorMongo> jugador) {
+        return jugadorService.guardarJugador(jugador);
+    }
 }
 
 
